@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Web com Xterm.js</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #222; color: #ddd; }
-        #terminal { width: 80vw; height: 50vh; margin: auto; border: 1px solid #555; padding: 10px; }
-    </style>
+    <title>WebXP</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Terminal Web</h1>
-    <div id="terminal"></div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
-    <script>
-        const term = new Terminal();
-        term.open(document.getElementById('terminal'));
-        term.writeln('Bem-vindo ao Terminal Web usando Xterm.js!');
-        term.onData(e => term.write(e)); // Simples eco do input
-    </script>
+    <div id="desktop">
+        <div class="icon" onclick="openWindow('notepad')">
+            <img src="icons/notepad.png" alt="Notepad">
+            <p>Bloco de Notas</p>
+        </div>
+        <div class="icon" onclick="openWindow('terminal')">
+            <img src="icons/terminal.png" alt="Terminal">
+            <p>Terminal</p>
+        </div>
+    </div>
+
+    <div id="taskbar">
+        <button id="startButton">Iniciar</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
