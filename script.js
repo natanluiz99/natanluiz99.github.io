@@ -34,3 +34,10 @@ function makeDraggable(el) {
 
     document.addEventListener("mouseup", () => { isDragging = false; });
 }
+if (app === "terminal") {
+    const term = new Terminal();
+    term.open(document.getElementById("terminal"));
+    term.writeln("Bem-vindo ao WebXP!");
+    term.onData(e => term.write(e));
+}
+
