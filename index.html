@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Terminal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        /* Estilos para a interface retro de terminal com efeito VCR TV */
+        body {
+            background-color: black;
+            color: green;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes textShadow {
+            0% {
+                text-shadow: 5px 0 1px rgba(0,30,255,0.5), -6.4389924193300864px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            15% {
+                text-shadow: 9.40218538552878136px 0 1px rgba(0,30,255,0.5), -8.40218538552878136px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            30% {
+                text-shadow: 13.7015590085143956px 0 1px rgba(0,30,255,0.5), -11.7015590085143956px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            45% {
+                text-shadow: 15.231056963361899px 0 1px rgba(0,30,255,0.5), -12.231056963361899px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            60% {
+                text-shadow: 13.202193051050636px 0 1px rgba(0,30,255,0.5), -11.202193051050636px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            75% {
+                text-shadow: 9.8948491305757957px 0 1px rgba(0,30,255,0.5), -8.8948491305757957px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            90% {
+                text-shadow: 5.443339761481782px 0 1px rgba(0,30,255,0.5), -3.443339761481782px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+            100% {
+                text-shadow: 3.6208764473832513px 0 1px rgba(0,30,255,0.5), -0.6208764473832513px 0 1px rgba(255,0,80,0.3), 0 0 3px;
+            }
+        }
+
+        /* Efeito de scan que passa pela tela de vez em quando */
+        @keyframes scanline {
+            0% {
+                inset-block-end: 100%;
+            }
+            80% {
+                inset-block-end: 100%;
+            }
+            100% {
+                inset-block-end: 0%;
+            }
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 255, 0, 0.2);
+            animation: scan 5s linear infinite;
+        }
+
+        .terminal {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border: 2px solid green;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            position: relative;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typed-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end) forwards;
+        }
+
+        /* Efeito de VCR TV */
+        @keyframes vcr-glitch {
+            0% { transform: skewX(0deg); opacity: 1; }
+            25% { transform: skewX(5deg); opacity: 0.8; }
+            50% { transform: skewX(-5deg); opacity: 0.6; }
+            75% { transform: skewX(3deg); opacity: 0.9; }
+            100% { transform: skewX(0deg); opacity: 1; }
+        }
+
+        .vcr-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 0, 0.05);
+            animation: vcr-glitch 0.3s infinite alternate;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="terminal" id="terminal"></div>
+    <div class="scanline"></div>
+    <div class="cursor" id="cursor"></div>
+    
+    <script>
+        const text = "Bem-vindo ao sistema retro.\nCarregando...\nIniciando protocolo de segurança...\nEntre com o usuário agente:";
+        let index = 0;
+        const speed = 30;
+        const terminal = document.getElementById("terminal");
+        
+        function typeText() {
+            if (index < text.length) {
+                terminal.innerHTML += text[index] === '\n' ? '<br>' : text[index];
+                index++;
+                setTimeout(typeText, speed);
+            }
+        }
+
+        setTimeout(typeText, speed);
+    </script>
+</body>
+</html>
