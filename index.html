@@ -1,108 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows 98 UI</title>
-    <link rel="stylesheet" href="os-gui/layout.css">
-    <link rel="stylesheet" href="os-gui/windows-98.css">
-    <link rel="stylesheet" href="os-gui/windows-default.css">
-    <script src="lib/jquery.js"></script>
-    <script src="os-gui/MenuBar.js"></script>
-    <script src="os-gui/$Window.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #008080;
-            margin: 0;
-            overflow: hidden;
-        }
-        .taskbar {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            background: linear-gradient(to bottom, #c0c0c0, #808080);
-            border-top: 2px solid #ffffff;
-            display: flex;
-            align-items: center;
-            padding: 5px;
-        }
-        .start-button {
-            background: linear-gradient(to bottom, #dfdfdf, #a0a0a0);
-            border: 2px solid #808080;
-            font-family: Tahoma, sans-serif;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/os-gui"></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="desktop">
-        <div class="taskbar">
-            <button class="start-button" onclick="toggleStartMenu()">Iniciar</button>
+    <div id="desktop">
+        <div class="icon" onclick="openNotepad()">
+            <img src="icons/notepad.png" alt="Notepad">
+            <p>Notepad</p>
         </div>
-        
-        <div id="start-menu" class="start-menu" style="display: none;">
-            <ul>
-                <li onclick="openWindow('notepad')">📄 Bloco de Notas</li>
-                <li onclick="openWindow('terminal')">💻 Terminal</li>
-                <li onclick="openWindow('file-manager')">📂 Gerenciador de Arquivos</li>
-            </ul>
+        <div class="icon" onclick="openTerminal()">
+            <img src="icons/terminal.png" alt="Terminal">
+            <p>Terminal</p>
         </div>
-        
-        <div id="notepad" class="window" style="display: none;">
-            <div class="title-bar">
-                <span>Bloco de Notas</span>
-                <button onclick="closeWindow('notepad')">X</button>
-            </div>
-            <textarea class="notepad-content"></textarea>
-        </div>
-        
-        <div id="terminal" class="window" style="display: none;">
-            <div class="title-bar">
-                <span>Terminal</span>
-                <button onclick="closeWindow('terminal')">X</button>
-            </div>
-            <div class="terminal-content">
-                <pre id="terminal-output"></pre>
-                <input type="text" id="terminal-input" onkeypress="handleTerminalInput(event)">
-            </div>
-        </div>
-        
-        <div id="file-manager" class="window" style="display: none;">
-            <div class="title-bar">
-                <span>Gerenciador de Arquivos</span>
-                <button onclick="closeWindow('file-manager')">X</button>
-            </div>
-            <div class="file-list"></div>
+        <div class="icon" onclick="openFileManager()">
+            <img src="icons/files.png" alt="Arquivos">
+            <p>Gerenciador de Arquivos</p>
         </div>
     </div>
-    <script>
-        function toggleStartMenu() {
-            let menu = document.getElementById('start-menu');
-            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function openWindow(id) {
-            let element = document.getElementById(id);
-            element.style.display = 'block';
-            let win = new $Window({title: id, content: element});
-            win.open();
-        }
-
-        function closeWindow(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        function handleTerminalInput(event) {
-            if (event.key === 'Enter') {
-                let input = document.getElementById('terminal-input');
-                let output = document.getElementById('terminal-output');
-                output.innerHTML += `\n> ${input.value}`;
-                input.value = '';
-            }
-        }
-    </script>
+    <div id="taskbar">
+        <button id="start-button">Iniciar</button>
+    </div>
+    <script src="apps/notepad.js"></script>
+    <script src="apps/terminal.js"></script>
+    <script src="apps/filemanager.js"></script>
 </body>
 </html>
