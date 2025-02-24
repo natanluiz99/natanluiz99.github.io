@@ -1,26 +1,26 @@
-/* Estilos Gerais */
 body {
     margin: 0;
     padding: 0;
-    background: #008080;
-    font-family: 'MS Sans Serif', sans-serif;
+    background-color: #008080;
+    font-family: Arial, sans-serif;
     overflow: hidden;
 }
 
-/* Área de Trabalho */
 #desktop {
-    width: 100%;
-    height: calc(100vh - 40px); /* Altura total menos a barra de tarefas */
+    width: 100vw;
+    height: 100vh;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 10px;
 }
 
-/* Ícones na Área de Trabalho */
 .icon {
-    display: inline-block;
-    width: 80px;
+    width: 64px;
     text-align: center;
-    margin: 10px;
     cursor: pointer;
+    user-select: none;
 }
 
 .icon img {
@@ -28,64 +28,20 @@ body {
     height: 48px;
 }
 
-.icon span {
-    display: block;
-    font-size: 12px;
-    color: white;
-}
-
-/* Barra de Tarefas */
 #taskbar {
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
     height: 40px;
-    background: #c0c0c0;
-    display: flex;
-    align-items: center;
-    border-top: 2px solid #ffffff;
-}
-
-#start-button {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    height: 100%;
-    background: #c0c0c0;
-    border-right: 2px solid #808080;
-    cursor: pointer;
-}
-
-#start-button img {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-}
-
-#start-button span {
-    font-size: 14px;
-    color: black;
-}
-
-/* Ícones na Barra de Tarefas */
-#taskbar-icons {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
-
-.taskbar-icon {
+    background-color: #C0C0C0;
     display: flex;
     align-items: center;
     padding: 5px;
-    margin-right: 5px;
-    background: #c0c0c0;
-    border: 1px solid #808080;
-    cursor: pointer;
 }
 
-.taskbar-icon img {
-    width: 16px;
-    height: 16px;
+#start-button {
+    background-color: #C0C0C0;
+    border: 2px solid #808080;
+    padding: 5px 10px;
+    cursor: pointer;
 }
