@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #008080;
+    font-family: 'MS Sans Serif', sans-serif;
+}
+
+#desktop {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
