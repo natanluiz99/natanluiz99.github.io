@@ -12,6 +12,30 @@
         <div class="taskbar">
             <button class="start-button">Iniciar</button>
         </div>
+        
+        <div id="notepad" class="window" style="display: none;">
+            <div class="title-bar">
+                <span>Bloco de Notas</span>
+                <button onclick="closeWindow('notepad')">X</button>
+            </div>
+            <textarea class="notepad-content"></textarea>
+        </div>
+        
+        <div id="terminal" class="window" style="display: none;">
+            <div class="title-bar">
+                <span>Terminal</span>
+                <button onclick="closeWindow('terminal')">X</button>
+            </div>
+            <div class="terminal-content"></div>
+        </div>
+        
+        <div id="file-manager" class="window" style="display: none;">
+            <div class="title-bar">
+                <span>Gerenciador de Arquivos</span>
+                <button onclick="closeWindow('file-manager')">X</button>
+            </div>
+            <div class="file-list"></div>
+        </div>
     </div>
     <script src="scripts.js"></script>
 </body>
