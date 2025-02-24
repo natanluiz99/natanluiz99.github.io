@@ -11,6 +11,31 @@
     <script src="os-gui/MenuBar.js"></script>
     <script src="os-gui/$Window.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #008080;
+            margin: 0;
+            overflow: hidden;
+        }
+        .taskbar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to bottom, #c0c0c0, #808080);
+            border-top: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        .start-button {
+            background: linear-gradient(to bottom, #dfdfdf, #a0a0a0);
+            border: 2px solid #808080;
+            font-family: Tahoma, sans-serif;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="desktop">
@@ -60,7 +85,9 @@
         }
 
         function openWindow(id) {
-            let win = new $Window({title: id, content: document.getElementById(id)});
+            let element = document.getElementById(id);
+            element.style.display = 'block';
+            let win = new $Window({title: id, content: element});
             win.open();
         }
 
