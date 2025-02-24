@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows 98 UI</title>
+    <link rel="stylesheet" href="os-gui/layout.css">
+    <link rel="stylesheet" href="os-gui/windows-98.css">
+    <link rel="stylesheet" href="os-gui/windows-default.css">
+    <script src="lib/jquery.js"></script>
+    <script src="os-gui/MenuBar.js"></script>
+    <script src="os-gui/$Window.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/os-gui"></script>
 </head>
 <body>
     <div class="desktop">
@@ -55,7 +60,8 @@
         }
 
         function openWindow(id) {
-            document.getElementById(id).style.display = 'block';
+            let win = new $Window({title: id, content: document.getElementById(id)});
+            win.open();
         }
 
         function closeWindow(id) {
