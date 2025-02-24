@@ -1,15 +1,20 @@
+/* Estilos Gerais */
 body {
     margin: 0;
     padding: 0;
     background: #008080;
     font-family: 'MS Sans Serif', sans-serif;
+    overflow: hidden;
 }
 
+/* Área de Trabalho */
 #desktop {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 40px); /* Altura total menos a barra de tarefas */
     position: relative;
 }
+
+/* Ícones na Área de Trabalho */
 .icon {
     display: inline-block;
     width: 80px;
@@ -29,6 +34,7 @@ body {
     color: white;
 }
 
+/* Barra de Tarefas */
 #taskbar {
     position: fixed;
     bottom: 0;
@@ -62,8 +68,24 @@ body {
     color: black;
 }
 
+/* Ícones na Barra de Tarefas */
 #taskbar-icons {
     display: flex;
     align-items: center;
     margin-left: 10px;
+}
+
+.taskbar-icon {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-right: 5px;
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    cursor: pointer;
+}
+
+.taskbar-icon img {
+    width: 16px;
+    height: 16px;
 }
