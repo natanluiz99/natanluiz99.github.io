@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa o desktop
     const desktop = new OS.GUI.Desktop('desktop');
 
     // Função para abrir o Notepad
