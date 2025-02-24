@@ -8,38 +8,41 @@
     <link rel="stylesheet" href="https://unpkg.com/os-gui@1.0.0/dist/os-gui.css">
 </head>
 <body>
-    <div id="taskbar">
-    <div id="start-button">
-        <img src="assets/icons/start.png" alt="Iniciar">
-        <span>Iniciar</span>
-    </div>
-    <div id="taskbar-icons"></div>
-    </div>
-    
+    <!-- Área de Trabalho -->
     <div id="desktop">
-    <!-- Ícones -->
-    <div class="icon" onclick="openNotepad()">
-        <img src="assets/icons/notepad.png" alt="Notepad">
-        <span>Notepad</span>
+        <!-- Ícones -->
+        <div class="icon" onclick="openNotepad()">
+            <img src="assets/icons/notepad.png" alt="Notepad">
+            <span>Notepad</span>
+        </div>
+        <div class="icon" onclick="openMediaViewer('image')">
+            <img src="assets/icons/images.png" alt="Fotos">
+            <span>Fotos</span>
+        </div>
+        <div class="icon" onclick="openMediaViewer('video')">
+            <img src="assets/icons/videos.png" alt="Vídeos">
+            <span>Vídeos</span>
+        </div>
+        <div class="icon" onclick="openMediaViewer('gif')">
+            <img src="assets/icons/gifs.png" alt="GIFs">
+            <span>GIFs</span>
+        </div>
+        <div class="icon" onclick="openTerminal()">
+            <img src="assets/icons/terminal.png" alt="Terminal">
+            <span>Terminal</span>
+        </div>
     </div>
-    <div class="icon" onclick="openMediaViewer('image')">
-        <img src="assets/icons/images.png" alt="Fotos">
-        <span>Fotos</span>
-    </div>
-    <div class="icon" onclick="openMediaViewer('video')">
-        <img src="assets/icons/videos.png" alt="Vídeos">
-        <span>Vídeos</span>
-    </div>
-    <div class="icon" onclick="openMediaViewer('gif')">
-        <img src="assets/icons/gifs.png" alt="GIFs">
-        <span>GIFs</span>
-    </div>
-    <div class="icon" onclick="openTerminal()">
-        <img src="assets/icons/terminal.png" alt="Terminal">
-        <span>Terminal</span>
-    </div>
-</div>
 
+    <!-- Barra de Tarefas -->
+    <div id="taskbar">
+        <div id="start-button">
+            <img src="assets/icons/start.png" alt="Iniciar">
+            <span>Iniciar</span>
+        </div>
+        <div id="taskbar-icons"></div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://unpkg.com/os-gui@1.0.0/dist/os-gui.js"></script>
     <script src="script.js"></script>
 </body>
