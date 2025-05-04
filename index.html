@@ -21,7 +21,7 @@
 			background: black;
 		}
 		body {
-			background: #111;
+			background-image: url('https://media.discordapp.net/attachments/1190823218467045426/1368712959714398228/GRcPXdpXcAAvGpC.png?ex=681938c7&is=6817e747&hm=c6330d78fb3eb5e700b357293f27cd1e70829bc112404d78af502d1635bcffee&=&format=webp&quality=lossless&width=389&height=438');
 		}
 		#menu {
 			position: fixed;
@@ -137,8 +137,7 @@
 			}
 
 
-	    const backgroundImage = new Image();
-	    backgroundImage.src = 'https://media.discordapp.net/attachments/1190823218467045426/1368712959714398228/GRcPXdpXcAAvGpC.png?ex=681938c7&is=6817e747&hm=c6330d78fb3eb5e700b357293f27cd1e70829bc112404d78af502d1635bcffee&=&format=webp&quality=lossless&width=389&height=438'; // Substitua pelo caminho da sua imagem de fundo
+	    
 			
             const alienImages = {
                 0: new Image(),
@@ -257,7 +256,7 @@
 
             draw(ctx) {
                 ctx.save();
-		ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Ajuste para o tamanho do canvas
+		
 		    
                 ctx.translate(this.x + 26, this.y + 26); // centraliza o desenho
 
