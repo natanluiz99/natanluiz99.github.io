@@ -136,6 +136,16 @@
 					smokedata[r][c] = new particle(c, r, 0, 0, 0);
 			}
 
+            const alienImages = {
+                0: new Image(),
+                1: new Image(),
+                2: new Image()
+            };
+
+            alienImages[0].src = 'https://media.discordapp.net/attachments/1190823218467045426/1368707618666975304/images.png?ex=681933cd&is=6817e24d&hm=a8b9d6e73d447d659966c5012fa9a3b44ebabdff971ca0051f49d314fc9e01cb&=&format=webp&quality=lossless&width=345&height=229';
+            alienImages[1].src = 'https://media.discordapp.net/attachments/1190823218467045426/1368707618666975304/images.png?ex=681933cd&is=6817e24d&hm=a8b9d6e73d447d659966c5012fa9a3b44ebabdff971ca0051f49d314fc9e01cb&=&format=webp&quality=lossless&width=345&height=229';
+            alienImages[2].src = 'https://media.discordapp.net/attachments/1190823218467045426/1368707618666975304/images.png?ex=681933cd&is=6817e24d&hm=a8b9d6e73d447d659966c5012fa9a3b44ebabdff971ca0051f49d314fc9e01cb&=&format=webp&quality=lossless&width=345&height=229';
+
 			var aliens = [];
 			var bullets = [];
 			var barriers = [];
@@ -239,12 +249,19 @@
                 }
             }
             
-            draw(ctx){
+            draw(ctx) {
                 ctx.save();
-                ctx.translate(this.x + 26, this.y + 26);
-                if(this.rot != 0)
-                    ctx.rotate(this.rot);
-                ctx.drawImage(sprites, 0, this.type * 26 + this.frame * 13, 13, 13, -26, -26, 13 * 4, 13 * 4);
+                ctx.translate(this.x + 26, this.y + 26); // centraliza o desenho
+
+                if (this.rot != 0)
+                    ctx.rotate(this.rot); // aplica rotação, se necessário
+
+                const img = alienImages[this.type]; // seleciona imagem pelo tipo
+
+                if (img.complete) {
+                    ctx.drawImage(img, -26, -26, 52, 52); // desenha a imagem com 52x52 no centro
+                }
+
                 ctx.restore();
             }
             
