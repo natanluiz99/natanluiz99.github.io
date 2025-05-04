@@ -60,6 +60,7 @@
 	</style>
 </head>
 <body>
+	<img id="powerup-img" src="https://media.discordapp.net/attachments/1190823218467045426/1368721136732340244/7896094921344.png?ex=68194064&is=6817eee4&hm=a19514e153aadb20cf0164a4bff57f7dc379234639c7ff7271c5740e69ceb801&=&format=webp&quality=lossless&width=1131&height=823" style="display: none;">
 	<img id="s" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAB1CAYAAACVmmvQAAABnUlEQVRYR+2XTXLDIAyFwzLH6f0P0eN0SQZmxEjy0x/jRW2nmzQ2HwLx9FDaa+OvEdN776219d17LgZp0JpIRLJWqlcwoTHj+Bwv6X/9nYNiUJQTAiekI2iY3kPIyx5PyiF73l5oBYdzifY1J80MOuzxIlBJsHywJ1hxTtuKWIfmCJYOfX5yVUfpX9rjpeFBojS2y91KtzXhrbUXnRF/f04itEKQ2QizjJYoLCwaLPaDbFjbtNbmYEoqp/IwzRJFPJilLntedFrQ7qVG0eD9VMne7W2Z+4GWDbxqst73GMGidoC3QEvl6CHSIh93jhtlFH/FSFFGYXecUrlVFrxVgLcGan65mZq3e7klQDd52MxzY9RLNc2SN1Y0CD17jFlu19PjBat7dP0LzW0JdNq/LYEhxCt6eVRT5p5+/l79941/PENoABQNgfsQnznaz4jcKsAqjX8O6Y1nlitSngHEVZMFFlQBJlQFUhDUnhfJVLkFWYC5PA94FKRFrBOTVgQH09CITmAJIrAMma1bpHzXli0PdO8nK2J4qSHwjtAHmVDPQwPNoZkAAAAASUVORK5CYII=">
 	<canvas id="c"></canvas>
 	<div id="score"></div>
@@ -156,10 +157,60 @@
 			var barriers = [];
 			var sprites = document.getElementById("s");
 
+	    const powerUpImage = document.getElementById("powerup-img");
+			
             function cross(x, y, x2, y2){
                 return x * y2 - x2 * y;
             }
 
+	    class PowerUpBlock {
+		    constructor(x, y) {
+		        this.x = x;
+		        this.y = y;
+		        this.width = 50;
+		        this.height = 20;
+		        this.speed = 2;
+		        this.direction = 1;
+		        this.active = true;
+		    }
+		
+		    update(canvasWidth) {
+		        this.x += this.speed * this.direction;
+		        if (this.x <= 0 || this.x + this.width >= canvasWidth) {
+		            this.direction *= -1;
+		        }
+		    }
+		
+		    draw(ctx) {
+		        if (this.active) {
+		            ctx.drawImage(powerUpImage, this.x, this.y, this.width, this.height);
+		        }
+		    }
+		
+		    checkCollision(bullets) {
+		        for (let i = 0; i < bullets.length; i++) {
+		            let b = bullets[i];
+		            if (
+		                b.x > this.x &&
+		                b.x < this.x + this.width &&
+		                b.y > this.y &&
+		                b.y < this.y + this.height &&
+		                this.active
+		            ) {
+		                bullets.splice(i, 1);
+		                this.active = false;
+		                return true;
+		            }
+		        }
+		        return false;
+		    }
+		}
+
+	    let powerUpBlock = new PowerUpBlock(100, 100); // posição inicial
+	    let doubleShotActive = false;
+	    let doubleShotTimer = 0;
+
+	
             class invader{
                 constructor(x, y, type, cd){
                     this.x = x;
@@ -352,6 +403,15 @@
                 }
             }
 
+	    function shoot() {
+		    if (doubleShotActive) {
+		        playerBullets.push({ x: player.x + 10, y: player.y });
+		        playerBullets.push({ x: player.x + 30, y: player.y });
+		    } else {
+		        playerBullets.push({ x: player.x + 20, y: player.y });
+		    }
+		}
+			
             class barrier{
                 constructor(x, y){
                     this.sx = this.x = x;
@@ -430,6 +490,19 @@
             }
 
             function update(t){
+
+		powerUpBlock.update(canvas.width);
+
+		if (powerUpBlock.checkCollision(playerBullets)) {
+		    doubleShotActive = true;
+		    doubleShotTimer = 300; // dura por 300 frames (~5 segundos se 60fps)
+		}
+		if (doubleShotActive) {
+		    doubleShotTimer--;
+		    if (doubleShotTimer <= 0) {
+		        doubleShotActive = false;
+		    }
+		}
                 if(t == -1)
                     lt = t;
                 timer += t - lt;
