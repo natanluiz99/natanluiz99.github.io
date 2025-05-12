@@ -1,0 +1,368 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: var(--ButtonFace);
+    color: var(--ButtonText);
+    font-family: sans-serif;
+    font-size: 10pt;
+}
+
+/* Canvas do efeito de Matrix */
+canvas {
+    position: fixed; /* Fixo para cobrir toda a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca o canvas atrás de tudo */
+}
+
+/* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho */
+/* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho *//* Área de trabalho */
+
+/* Área de trabalho */
+#desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Garante que os ícones e janelas fiquem acima do canvas */
+}
+
+/* Ícones na área de trabalho */
+.desktop-icon {
+    position: absolute;
+    width: 64px;
+    margin: 10px;
+    text-align: center;
+    cursor: grab;
+    user-select: none; /* Impede seleção de texto ao arrastar */
+    z-index: 2; /* Garante que os ícones fiquem acima do canvas */
+    
+}
+
+.desktop-icon img {
+    width: 32px;
+    height: 32px;
+    
+}
+
+.desktop-icon span {
+    display: block;
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+
+
+
+
+
+/* Barra de tarefas */
+#taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #c0c0c0;
+    display: flex;
+    align-items: center;
+    border-top: 2px solid #ffffff;
+    box-shadow: 0 -1px 0 #000000;
+    z-index: 3; /* Garante que a barra de tarefas fique acima de tudo */
+}
+
+/* Estilos dos aplicativos na barra de tarefas */
+.taskbar-app {
+    padding: 0 8px;
+    height: 100%;
+    background-color: #c0c0c0;
+    border-right: 2px solid #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.taskbar-app.minimized {
+    background-color: #808080;
+}
+
+
+
+
+/* Estilos para o visualizador de imagens */
+#image-viewer {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 400px;
+    height: 300px;
+    z-index: 2; /* Garante que fique acima do canvas */
+}
+
+#image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+}
+
+
+
+
+#start-button {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    height: 100%;
+    background-color: #c0c0c0;
+    border-right: 2px solid #ffffff;
+    cursor: pointer;
+}
+
+#start-button img {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+#start-button span {
+    font-size: 12px;
+    color: black;
+}
+
+
+#taskbar-apps {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+}
+
+
+.window {
+    border: 2px solid #000;
+    background-color: #c0c0c0;
+    position: absolute;
+}
+
+.menus {
+    background-color: #c0c0c0;
+    padding: 2px;
+}
+
+.toolbars {
+    display: flex;
+    flex-direction: column;
+    padding: 1px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    border: 1px solid var(--ButtonShadow);
+    box-shadow: 0 1px 0 var(--ButtonHilight), 0 1px 0 var(--ButtonHilight) inset;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.toolbar-drag-handle {
+    flex: 0 0 auto;
+    width: 10px;
+    box-sizing: border-box;
+    align-self: stretch;
+    position: relative;
+    touch-action: none;
+}
+
+.toolbar-drag-handle::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 4px;
+    bottom: 1px;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: var(--ButtonHilight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonHilight);
+}
+
+.toolbar + .toolbar {
+    border-top: 1px solid var(--ButtonHilight);
+    box-shadow: 0px -1px 0px var(--ButtonShadow);
+    margin-top: 2px;
+}
+
+.toolbar-button {
+    width: 54px;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0;
+    font-size: 12px;
+    line-height: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.toolbar-button .icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    background-image: url("../../images/browse-ui-icons-grayscale.png");
+}
+
+.toolbar-button:enabled:hover .icon {
+    background-image: url("../../images/browse-ui-icons.png");
+}
+
+.toolbar-button:disabled .icon {
+    filter: saturate(0%) opacity(50%);
+}
+
+#address-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+#address-compound-input {
+    background: var(--Window);
+    color: var(--WindowText);
+    flex: 1;
+    display: flex;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#address-icon {
+    display: inline-block;
+    margin-right: 4px;
+    margin-left: 1px;
+    align-self: center;
+}
+
+#address {
+    flex: 1;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    min-width: 0;
+    width: 0;
+}
+
+#content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--Window);
+    color: var(--WindowText);
+    min-width: 0;
+    min-height: 0;
+}
+
+#file-list {
+    padding: 10px;
+}
+
+#status-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    gap: 2px;
+    height: 18px;
+}
+
+#status-bar > * {
+    height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+}
+
+#status-bar-left {
+    width: 250px;
+}
+
+#status-bar-middle {
+    flex: 1;
+}
+
+#status-bar-right {
+    width: 170px;
+    display: flex;
+    gap: 3px;
+}
+
+
+
+
+
+/* Estilos do ícone na área de trabalho */
+
+
+/* Estilos para a janela do terminal */
+#terminal-window {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 600px;
+    height: 400px;
+    z-index: 2; /* Garante que fique acima do canvas */
+}
+
+/* Estilos para o terminal */
+#terminal {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #000; /* Fundo preto */
+    color: #0f0; /* Texto verde */
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+
+
+
+.desktop-icon {
+    position: absolute; /* Permite que o ícone seja posicionado livremente */
+    width: 64px;
+    margin: 10px;
+    text-align: center;
+    cursor: grab;
+    user-select: none; /* Impedir seleção de texto ao arrastar */
+}
+
+.desktop-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.desktop-icon span {
+    display: block;
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
